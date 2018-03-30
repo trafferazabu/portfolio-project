@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {%load staticfiles%}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Traffer's Site Home </title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="album.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="{% url 'home' %}">Traffer</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav ml-auto">
+      <a class="nav-item nav-link " href="http://twitter.com">Twitter </a>
+      <a class="nav-item nav-link" href="{%static 'TrafferZresume.doc'%}">Resume</a>
+      <a class="nav-item nav-link" href="{% url 'allblogs' %}">Blog</a>
+    </div>
+  </div>
+</nav>
+    </header>
+
+    <main role="main">
+
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Traffer Z</h1>
+          <p class="lead text-muted">Possibly you'll find this as interesting as I do.</p>
+          <p>
+            <a href="mailto:trafferazabu@gmail.com" class="btn btn-primary my-2">Email</a>
+          </p>
+          <img src="{% static 'profilepic.png' %}" height="300" />
+        </div>
+      </section>
+
+      <div class="album py-5 bg-light">
+        <div class="container">
+
+
+          <div class="row">
+          {% for job in jobs.all %}
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="{{job.image.url}}" />
+                <div class="card-body">
+                  <p class="card-text">{{job.summary}}</p>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="text-muted">
+      <div class="container text-center">
+        </p>
+        <p>© Me {% now "Y" %}</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+<!-- Start add popup login, with jobs summary added as example of popup power -->
+    <div class="container">
+      <h2>Modal Login Example</h2>
+      <!-- Trigger the modal with a button -->
+      <button type="button" class="btn btn-default btn-lg" id="myBtn">Login</button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header" style="padding:35px 50px;">
+              <button type="button" class="close" data-dismiss="modal">&amp;times;</button>
+              <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
+            </div>
+            <div class="modal-body" style="padding:40px 50px;">
+              <form role="form">
+                <div class="form-group">
+                  <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+                  <input type="text" class="form-control" id="usrname" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                  <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+                  <input type="text" class="form-control" id="psw" placeholder="Enter password">
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" value="" checked>Remember me</label>
+                </div>
+                <div class="row">
+                {% for job in jobs.all %}
+                  <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                      <img class="card-img-top" src="{{job.image.url}}" />
+                      <div class="card-body">
+                        <p class="card-text">{{job.summary}}</p>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+                </div>
+                  <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+              <p>Not a member? <a href="#">Sign Up</a></p>
+              <p>Forgot <a href="#">Password?</a></p>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <script>
+    $(document).ready(function(){
+        $("#myBtn").click(function(){
+            $("#myModal").modal();
+        });
+    });
+    </script>
+<!-- End add popup login, with jobs summary added as example of popup power -->
+
+  </body>
+</html>
